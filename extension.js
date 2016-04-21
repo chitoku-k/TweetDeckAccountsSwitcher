@@ -1,17 +1,17 @@
-(function () {
+(() => {
     "use strict";
 
-    var callback = function () {
-        var timer = setInterval(function () {
-            var drawer = $("div.js-drawer.drawer");
-            if (drawer.length > 0) {
+    const callback = () => {
+        const timer = setInterval(() => {
+            const drawer = $("div.js-drawer.drawer");
+            if (drawer.length) {
                 clearInterval(timer);
-                drawer.on("uiAccountsSelected", function (event, obj) {
+                drawer.on("uiAccountsSelected", (event, obj) => {
                     if (obj.accountKeys <= 1) {
                         return;
                     }
-                    for (var i = 0; i < obj.accountKeys.length - 1; i++) {
-                        $(".js-account-item[data-account-key='" + obj.accountKeys[i] + "']").click();
+                    for (let i = 0; i < obj.accountKeys.length - 1; i++) {
+                        $(`.js-account-item[data-account-key='${obj.accountKeys[i]}']`).click();
                     }
                     $(".js-compose-text").focus();
                 });
@@ -19,7 +19,7 @@
         }, 200);
     };
 
-    var script = document.createElement("script");
-    script.appendChild(document.createTextNode("(" + callback.toString() + "());"));
+    const script = document.createElement("script");
+    script.appendChild(document.createTextNode(`(${callback.toString()})();`));
     document.body.appendChild(script);
-}());
+})();
