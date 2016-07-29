@@ -2,24 +2,20 @@
     "use strict";
 
     const callback = () => {
-        const timer = setInterval(() => {
-            const drawer = $("div.js-drawer.drawer");
-            if (drawer.length) {
-                clearInterval(timer);
-                drawer.on("uiAccountsSelected", (event, obj) => {
-                    if (obj.accountKeys <= 1) {
-                        return;
-                    }
-                    for (let i = 0; i < obj.accountKeys.length - 1; i++) {
-                        $(`.js-account-item[data-account-key='${obj.accountKeys[i]}']`).click();
-                    }
-                    $(".js-compose-text").focus();
+        $(document).on("dataColumnsLoaded", () => {
+            $("div.js-drawer.drawer").on("uiAccountsSelected", (e, { accountKeys }) => {
+                e.stopImmediatePropagation();
+
+                accountKeys.slice(0, -1).forEach(key => {
+                    $(`.js-account-item[data-account-key='${key}']`).click();
                 });
-            }
-        }, 200);
+
+                $(".js-compose-text").focus();
+            });
+        });
     };
 
     const script = document.createElement("script");
-    script.appendChild(document.createTextNode(`(${callback.toString()})();`));
+    script.appendChild(document.createTextNode(`(${callback})();`));
     document.body.appendChild(script);
 })();
