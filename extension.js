@@ -4,11 +4,12 @@
     const callback = () => {
         $(document).on("dataColumnsLoaded", () => {
             $("div.js-drawer.drawer").on("uiAccountsSelected", (e, { accountKeys }) => {
-                e.stopImmediatePropagation();
+                if (accountKeys.length <= 1) {
+                    return;
+                }
 
-                accountKeys.slice(0, -1).forEach(key => {
-                    $(`.js-account-item[data-account-key='${key}']`).click();
-                });
+                accountKeys.shift();
+                $(this).triggerHandler("uiAccountsSelected", e, { accountKeys });
 
                 $(".js-compose-text").focus();
             });
