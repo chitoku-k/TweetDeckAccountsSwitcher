@@ -1,6 +1,4 @@
 (() => {
-    "use strict";
-
     const callback = () => {
         $(document).on("dataColumnsLoaded", () => {
             $("div.js-drawer.drawer").on("uiAccountsSelected", (e, { accountKeys }) => {
