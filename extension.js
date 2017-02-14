@@ -1,50 +1,50 @@
 (() => {
     const callback = () => {
+        /**
+         * Hooks "New Tweet" drawer and choose the last selected account.
+         */
         function drawer() {
+            // Dispatched when any account is clicked
             $("div.js-drawer.drawer").on("uiAccountsSelected", (e, { accountKeys }) => {
+                // Cancel when the number of accounts <= 1
                 if (accountKeys.length <= 1) {
                     return;
                 }
 
+                // Removes an account from the queue
                 accountKeys.shift();
                 $(this).triggerHandler("uiAccountsSelected", e, { accountKeys });
 
+                // Focuses on the textbox
                 $(".js-compose-text").focus();
             });
         }
 
+        /**
+         * Observes "Retweet from" modal appear and choose the last selected account.
+         */
         function observe() {
+            // The MutationObserver monitors the style attribute of the retweet modal
+            // since its all descendent elements are removed when it is closed.
             const modal = $("#actions-modal");
             const observer = new MutationObserver(() => {
                 const selector = modal.find("ul.js-account-selector");
-                const selected = selector.find(".acc-selected")
-                                         .map((i, e) => e.dataset.id)
-                                         .get();
+                let selected = selector.find(".acc-selected").data("id");
 
-                let switching = false;
                 selector.on("td-accounts-change", (e, { selectedAccounts }) => {
-                    if (switching) {
+                    // Cancel when the number of accounts <= 1
+                    if (selectedAccounts.length <= 1) {
+                        // Assign the last selected account or undefined
+                        const [ current ] = selectedAccounts;
+                        selected = current.account;
                         return;
                     }
 
-                    const [ current ] = selectedAccounts.filter(x => !selected.includes(x.account));
-                    selected.length = 0;
+                    // Gets the last selected account
+                    const [ current ] = selectedAccounts.filter(x => selected !== x.account);
 
-                    if (!current) {
-                        return;
-                    }
-
-                    selector.find(".acc-selected").each((i, e) => {
-                        if (e.dataset.id === current.account) {
-                            return;
-                        }
-
-                        switching = true;
-                        e.click();
-                        switching = false;
-                    });
-
-                    selected.push(current.account);
+                    // Click all the selected accounts expect the last selected one
+                    selector.find(".acc-selected").each((i, e) => e.dataset.id === current.account || e.click());
                 });
             });
 
