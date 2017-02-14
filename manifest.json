@@ -1,6 +1,6 @@
 {
     "name": "TweetDeck Accounts Switcher",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "manifest_version": 2,
     "description": "TweetDeck のアカウント選択を複数選択ではなく切り替えになるように拡張します。",
     "icons": {

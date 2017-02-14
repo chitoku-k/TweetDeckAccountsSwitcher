@@ -27,15 +27,24 @@
                         return;
                     }
 
-                    selector.find(".acc-selected").each((i, e) => {
-                        if (selected.includes(e.dataset.id)) {
-                            switching = true;
-                            e.click();
-                            switching = false;
-                        }
-                    });
+                    const [ current ] = selectedAccounts.filter(x => !selected.includes(x.account));
                     selected.length = 0;
-                    selected.push(...selectedAccounts.map(x => x.account));
+
+                    if (!current) {
+                        return;
+                    }
+
+                    selector.find(".acc-selected").each((i, e) => {
+                        if (e.dataset.id === current.account) {
+                            return;
+                        }
+
+                        switching = true;
+                        e.click();
+                        switching = false;
+                    });
+
+                    selected.push(current.account);
                 });
             });
 
