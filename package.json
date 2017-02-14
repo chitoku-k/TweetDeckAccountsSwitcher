@@ -1,0 +1,32 @@
+{
+  "name": "tweetdeck-account-switcher",
+  "version": "1.1.4",
+  "description": "Forces Accounts Selector in TweetDeck to Choose One Account",
+  "main": "extension.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./extension.js",
+    "deploy": "node --harmony-async-await ./deploy/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chitoku-k/TweetDeckAccountSwitcher.git"
+  },
+  "keywords": [
+    "tweetdeck"
+  ],
+  "author": "Chitoku <odango@chitoku.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chitoku-k/TweetDeckAccountSwitcher/issues"
+  },
+  "homepage": "https://github.com/chitoku-k/TweetDeckAccountSwitcher#readme",
+  "devDependencies": {
+    "chrome-extension-deploy": "^3.0.0",
+    "eslint": "^3.15.0",
+    "glob": "^7.1.1",
+    "glob-promise": "^3.1.0",
+    "mz": "^2.6.0",
+    "node-zip": "^1.1.1"
+  }
+}
