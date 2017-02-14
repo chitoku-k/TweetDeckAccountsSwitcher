@@ -24,7 +24,6 @@ class ChromeExtensionUploader {
     async publish() {
         const zip = await fs.readFile(this.filename);
         await deploy(Object.assign(this.options, {
-            to: deploy.TRUSTED_TESTERS,
             zip,
         }));
     }

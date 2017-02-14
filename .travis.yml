@@ -19,7 +19,7 @@ script:
   - npm run lint
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_TAG" = "" ]; then
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_TAG" = "" ]; then
       exit 0;
     fi
   - npm run deploy
