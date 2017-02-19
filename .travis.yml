@@ -1,22 +1,45 @@
 language: node_js
 node_js: '7'
 
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
 cache:
   directories:
     - node_modules
 
 env:
   global:
-    - secure: "dPLtyrTm8xc9x7b7Pd9EpWZ1D1B2Y58e3N5jstP33IIJZWRm7FhXc6lRlRdhXhgZZCxY2DrUv4fIMCeaA2jFkEpKzXCGRWIG5Xo6C5YFsouJ+vQgeB/MX4/df72tSkwDv6pVSbQU6HBLDWWNWduvFIqGCapdmfvSezqu2FjMC6OYHVTThov8jxIqk4iJuxzY+PQhlJrIq9CqB/D32KK0JvX80X0qQB/9yiNLqyzoWwHHDWHFzJP46pyEWrcKmQmwv/CC7ZwRCXPcCttT/mzgqgS4mwq3k62Zyr9JpBgq3BnOuDEhgdyG/odYy4lSX9ih3EpRTv9Ix3OPF+r9XoUtEqRtAGa2HBSaGxL9Qz5TDMBDQvHYFv3QVaBJDyT4paD5aSJGEPNM0mRlSxgvjg6zDl7VKk2Fc3+2rx3vBI1d6mLn74ETu4BZ+M7ifUJCIZ8Aj+sj/hB5/viAjofwsHsB+s4sQ+T2PrRXTjvQZhyzLveHSjjtrB+/yB4rCUjrU9A8ntBdqoqA8cCyNhUxVzjPKABVkFqjvHpwvD6VhIHSMKDVFRKg2j4Ws0d2hllJCP/Gjsttqi0KzV0QPYpHOfEf023kN4vszjmXtLf7GmWxn+tLTxu5g1mKDpFFSRD3Fc/6zTEMDc5+MqGumBx+ZZvymAVYipfyJaVzvq3LX2DbfKM="
+    - secure: "Lr7BafmQxYiBbvwxdfdyOGpYexK5dRBIf56lYaQIL4Xh7E3GrtgNjZGKBR/2mZ7KSzxcqqrAmBH5vh6ZQ7jWFWaA1U+lh+Y+Mh9Om3gALVpk6lhdwlfmMccTJhrx5qwL5J3+KIcxVl1C2dSwmmEIMF1ekgZyrXCCgp/fof+iT2vx+wvtpSRLM2qkVLRK5dPwB0AU/VTlHRK+7KKS6x9PJ88+eZhmbvI4jC7wIfUVLJ0FwyNYu5YmfoWgeQLddeePXn+BZ/Gtmx/oM8K4iZ24162GJchJaUZJqTKOFhBkOJmOx5KrFFctpjkFq+WHATxSOafUAbTlAz9cE8ukA7xOfODrcYyt5DQEymR6iZLi7ZZnqEjeXihUUf+FNG9mYqyJMj+RRhu9Akrf4yOF/H3eZqVU3ZbZmDKoH0Rv46GlrzBP1cOwWXmKFSJ5vNBslIwWqEPFbWwLFLoba+ur2O2jsUZhxAak6cygEokqSYnbvPYa4MHH3pxswBQJhqFH88NhtUalOiWGxZtg9SPWvKydXKAWgpZEs/n0m7+H4FSyyTkMYKppc6XcbK0uHg5qwSGkvt7W/HhTMQ8uujAgGxBePBNQxjoZeScO+mHliKDMlbDmYeBtN8+nkvoQXvpAhaLbRC/xMFcnC2MB3aRP91912ZdBK55630W2ZTJjY6433ZI="
     - GOOGLE_EXTENSION_ID='cjnfkpniglbbhifpkfnclpndpbhmfllh'
+    - DISPLAY=':99.0'
+    - CHROME_BIN='chromedriver'
 
 before_install:
+  - DRIVER_VER=$(curl -sL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+  - curl -sOJ "https://chromedriver.storage.googleapis.com/$DRIVER_VER/chromedriver_linux64.zip"
+  - unzip chromedriver_linux64.zip
+  - sudo mv chromedriver /usr/local/bin
 
 install:
   - npm install
 
+before_script:
+  - sh -e /etc/init.d/xvfb start
+  - pushd ..
+  - google-chrome --pack-extension=$OLDPWD
+  - mv *.crx $OLDPWD/
+  - popd
+
 script:
   - npm run lint
+  - npm test
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_TAG" = "" ]; then
