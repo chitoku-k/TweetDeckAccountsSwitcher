@@ -23,9 +23,7 @@ class ChromeExtensionUploader {
 
     async publish() {
         const zip = await fs.readFile(this.filename);
-        await deploy(Object.assign(this.options, {
-            zip,
-        }));
+        await deploy(Object.assign(this.options, { zip }));
     }
 }
 
@@ -40,9 +38,11 @@ class ChromeExtensionUploader {
         });
         await uploader.create();
         await uploader.publish();
+        console.log("Deploy: Extension is successfully published");
     } catch (e) {
         console.error("Error: cannot publish extension.");
         console.log(e);
+        process.exit(1);
     } finally {
         await fs.unlink(filename);
     }
