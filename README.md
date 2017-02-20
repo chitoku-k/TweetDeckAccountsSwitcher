@@ -4,7 +4,8 @@ TweetDeck Accounts Switcher
 [![][travis-badge]][travis-link]
 [![][dependencies-badge]][dependencies-link]
 
-TweetDeck のアカウント選択を複数選択ではなく切り替えになるように拡張します。
+TweetDeck のアカウント選択を複数選択ではなく切り替えになるように拡張します。  
+新規ツイートでの選択とリツイートのダイアログでの選択の両方に対応しています。
 
 ![サンプル](https://raw.githubusercontent.com/wiki/chitoku-k/TweetDeckAccountsSwitcher/tweetdeck_account_switcher_enabled.gif)
 
