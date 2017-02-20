@@ -1,6 +1,6 @@
 const fs = require("mz/fs");
 const glob = require("glob-promise");
-const jszip = require("node-zip");
+const JSZip = require("node-zip");
 const deploy = require("chrome-extension-deploy");
 
 class ChromeExtensionUploader {
@@ -38,7 +38,7 @@ class ChromeExtensionUploader {
         });
         await uploader.create();
         await uploader.publish();
-        console.log("Deploy: Extension is successfully published");
+        console.log("Deploy: Extension is successfully published.");
     } catch (e) {
         console.error("Error: cannot publish extension.");
         console.log(e);

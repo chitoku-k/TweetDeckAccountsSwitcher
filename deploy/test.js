@@ -101,7 +101,7 @@ class WebDriver {
                 const accounts = await main.findElements(By.css("ul.js-account-selector li.js-account-item"));
                 const target = accounts[Math.floor(Math.random() * accounts.length)];
                 const id = await target.getAttribute("data-id");
-                await test.trigger("click", "li.js-account-item[data-id=\"" + id + "\"]");
+                await test.trigger("click", `li.js-account-item[data-id="${id}"]`);
 
                 const current = await main.findElements(By.css("li.acc-selected"));
                 assert(current.length <= 1);

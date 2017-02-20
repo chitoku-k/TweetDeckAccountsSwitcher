@@ -4,7 +4,7 @@
   "description": "Forces Accounts Selector in TweetDeck to Choose One Account",
   "main": "extension.js",
   "scripts": {
-    "lint": "eslint ./extension.js",
+    "lint": "eslint **/*.js",
     "deploy": "node --harmony-async-await ./deploy/main.js",
     "test": "node --harmony-async-await ./deploy/test.js"
   },
