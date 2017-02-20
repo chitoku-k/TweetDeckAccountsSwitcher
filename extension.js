@@ -36,7 +36,7 @@
                     if (selectedAccounts.length <= 1) {
                         // Assign the last selected account or undefined
                         const [ current ] = selectedAccounts;
-                        selected = current.account;
+                        selected = current ? current.account : null;
                         return;
                     }
 
