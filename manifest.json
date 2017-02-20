@@ -8,7 +8,7 @@
     },
     "content_scripts": [{
         "js": ["./extension.js"],
-        "matches": ["https://tweetdeck.twitter.com/"],
+        "matches": ["https://tweetdeck.twitter.com/*"],
         "run_at": "document_idle"
     }]
 }
