@@ -44,6 +44,8 @@ $ unzip chromedriver_linux64.zip
 $ sudo mv chromedriver /usr/local/bin
 ```
 
+### 実行
+
 テストを実行する前に Chrome をすべて終了して拡張機能をパッケージ化します。
 
 ```bash
@@ -52,8 +54,6 @@ $ google-chrome --pack-extension=$OLDPWD
 $ mv *.crx $OLDPWD/
 $ popd
 ```
-
-### 実行
 
 次のコマンドを実行すると Chrome が自動で起動/終了して動作を確認します。
 
