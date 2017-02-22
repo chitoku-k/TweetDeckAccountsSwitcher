@@ -11,7 +11,7 @@ TweetDeck のアカウント選択を複数選択ではなく切り替えにな�
 
 ## インストール
 
-Chrome で次のウェブストアで [CHROME に追加] をクリックします。  
+Chrome でウェブストアを開き [CHROME に追加] をクリックします。  
 [TweetDeck Accounts Switcher - Chrome ウェブストア](https://chrome.google.com/webstore/detail/tweetdeck-accounts-switch/cjnfkpniglbbhifpkfnclpndpbhmfllh)
 
 ## テスト
