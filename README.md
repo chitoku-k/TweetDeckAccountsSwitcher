@@ -35,7 +35,7 @@ $ npm install
 ```
 
 次に Selenium の ChromeDriver をダウンロードして PATH の通っている場所に配置します。  
-URL のうち `_linux64` の部分は環境に合わせて `_win32`, `_mac64`, `_linux32` などに変更する必要があります。
+URL のうち `_linux64` の部分は環境に合わせて `_mac64`, `_linux32` などに変更する必要があります。
 
 ```bash
 $ DRIVER_VER=$(curl -sL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
@@ -46,11 +46,23 @@ $ sudo mv chromedriver /usr/local/bin
 
 ### 実行
 
-テストを実行する前に Chrome をすべて終了して拡張機能をパッケージ化します。
+Linux の場合は PATH が通っていることを確認して次のコマンドを実行します。
+
+```bash
+$ chrome='google-chrome'
+```
+
+macOS の場合は Chrome をインストールしてあることを確認して次のコマンドを実行します。
+
+```
+$ chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+```
+
+Chrome をすべて終了して拡張機能をパッケージ化します。
 
 ```bash
 $ pushd ..
-$ google-chrome --pack-extension=$OLDPWD
+$ $chrome --pack-extension=$OLDPWD
 $ mv *.crx $OLDPWD/
 $ popd
 ```
