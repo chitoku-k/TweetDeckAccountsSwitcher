@@ -21,58 +21,25 @@ Chrome でウェブストアを開き [CHROME に追加] をクリックしま�
 Selenium を使用した自動テストを実行するには次の環境を準備します。
 
 - Node.js v7 以上
+- Google Chrome
 - TweetDeck のユーザー名とパスワード（テスト用推奨）
 - GUI 環境または X virtual framebuffer などの仮想ディスプレイ
 
-Windows でも動作を確認しましたがコマンドは適宜読み替えてください……！
-
 ### 環境の構築
 
-まずは次のコマンドを実行して必要なパッケージをインストールします。
+次のコマンドを実行して必要なパッケージをインストールします。
 
 ```bash
 $ npm install
 ```
 
-次に Selenium の ChromeDriver をダウンロードして PATH の通っている場所に配置します。  
-URL のうち `_linux64` の部分は環境に合わせて `_win32`, `_mac64`, `_linux32` などに変更する必要があります。
-
-```bash
-$ DRIVER_VER=$(curl -sL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-$ curl -sOJ "https://chromedriver.storage.googleapis.com/$DRIVER_VER/chromedriver_linux64.zip"
-$ unzip chromedriver_linux64.zip
-$ sudo mv chromedriver /usr/local/bin
-```
-
 ### 実行
 
-Linux の場合は PATH が通っていることを確認して次のコマンドを実行します。
-
-```bash
-$ chrome='google-chrome'
-```
-
-macOS の場合は Chrome をインストールしてあることを確認して次のコマンドを実行します。
-
-```
-$ chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-```
-
-Chrome をすべて終了して拡張機能をパッケージ化します。
-
-```bash
-$ pushd ..
-$ $chrome --pack-extension=$OLDPWD
-$ mv *.crx $OLDPWD/
-$ popd
-```
-
-次のコマンドを実行すると Chrome が自動で起動/終了して動作を確認します。
+コマンドを実行すると Chrome が自動で起動/終了してパッケージを生成し動作を確認します。
 
 ```bash
 $ export TEST_TWITTER_USERNAME='<Your TweetDeck Username>'
 $ export TEST_TWITTER_PASSWORD='<Your TweetDeck Password>'
-$ export CHROME_BIN='chromedriver'
 $ npm test
 ```
 

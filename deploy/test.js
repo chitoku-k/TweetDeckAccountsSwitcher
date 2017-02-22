@@ -1,43 +1,23 @@
 const assert = require("assert");
 const webdriver = require("selenium-webdriver");
-const chrome = require("selenium-webdriver/chrome");
-
 const By = webdriver.By;
 const until = webdriver.until;
-
-class WebDriver {
-    constructor(path, timeout) {
-        const options = new chrome.Options();
-        options.addArguments("no-sandbox");
-        options.addExtensions(path);
-
-        const builder = new webdriver.Builder();
-        builder.forBrowser("chrome");
-        builder.setChromeOptions(options);
-
-        this.timeout = timeout;
-        this.driver = builder.build();
-        this.action = new webdriver.ActionSequence(this.driver);
-    }
-
-    initialize() {
-        const timeouts = this.driver.manage().timeouts();
-        return Promise.all([
-            timeouts.implicitlyWait(this.timeout),
-            timeouts.pageLoadTimeout(this.timeout),
-            timeouts.setScriptTimeout(this.timeout),
-        ]);
-    }
-
-    trigger(event, selector) {
-        return this.driver.executeScript("$('" + selector + "').trigger('" + event + "')");
-    }
-}
+const ChromeExtension = require("./ChromeExtension");
+const WebDriver = require("./WebDriver");
 
 (async () => {
     try {
+        if (!process.env.TEST_TWITTER_USERNAME || !process.env.TEST_TWITTER_PASSWORD) {
+            throw new Error("Username or password must be specified.");
+        }
+
+        // Create package
+        const extension = new ChromeExtension();
+        await extension.byCrx();
+        console.log("Test: Package is generated.");
+
         // Initialize
-        const test = new WebDriver("./TweetDeckAccountsSwitcher.crx", 30000);
+        const test = new WebDriver("./target.crx", 30000);
         await test.initialize();
 
         await test.driver.get("https://tweetdeck.twitter.com");
@@ -68,7 +48,7 @@ class WebDriver {
         const main = await test.driver.findElement(By.css(".application"));
 
         // Since the app is loaded, shorten timeout value.
-        await test.driver.manage().timeouts().implicitlyWait(50);
+        await test.driver.manage().timeouts().implicitlyWait(0);
         console.log("Test: Application is loaded.");
 
         for (let i = 0; i < 5; i++) {
@@ -77,7 +57,7 @@ class WebDriver {
             // New Tweet button
             await test.trigger("click", ".js-show-drawer.btn-compose");
 
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < 50; j++) {
                 const accounts = await main.findElements(By.css(".js-account-list .js-account-item"));
                 const target = accounts[Math.floor(Math.random() * accounts.length)];
                 const key = await target.getAttribute("data-account-key");
@@ -97,7 +77,7 @@ class WebDriver {
             // Open Retweet modal
             await test.trigger("click", "a.tweet-action[rel=retweet]");
 
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < 50; j++) {
                 const accounts = await main.findElements(By.css("ul.js-account-selector li.js-account-item"));
                 const target = accounts[Math.floor(Math.random() * accounts.length)];
                 const id = await target.getAttribute("data-id");
