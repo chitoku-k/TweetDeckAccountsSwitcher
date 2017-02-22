@@ -24,6 +24,8 @@ Selenium を使用した自動テストを実行するには次の環境を準�
 - TweetDeck のユーザー名とパスワード（テスト用推奨）
 - GUI 環境または X virtual framebuffer などの仮想ディスプレイ
 
+Windows でも動作を確認しましたがコマンドは適宜読み替えてください……！
+
 ### 環境の構築
 
 まずは次のコマンドを実行して必要なパッケージをインストールします。
@@ -33,7 +35,7 @@ $ npm install
 ```
 
 次に Selenium の ChromeDriver をダウンロードして PATH の通っている場所に配置します。  
-URL のうち `_linux64` の部分は環境に合わせて `_mac64`, `_linux32` などに変更する必要があります。
+URL のうち `_linux64` の部分は環境に合わせて `_win32`, `_mac64`, `_linux32` などに変更する必要があります。
 
 ```bash
 $ DRIVER_VER=$(curl -sL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
