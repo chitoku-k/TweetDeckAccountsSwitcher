@@ -22,17 +22,18 @@ module.exports = class ChromeExtension {
 
     async getChromePath() {
         switch (os.platform()) {
-            case "linux":
+            case "linux": {
                 return "/usr/bin/google-chrome";
-
-            case "darwin":
+            }
+            case "darwin": {
                 return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-
-            case "win32":
+            }
+            case "win32": {
                 const path = "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe";
                 for (const [ key, { values } ] of await this.findWin32Registry(path)) {
                     return values[""].value;
                 }
+            }
         }
     }
 
