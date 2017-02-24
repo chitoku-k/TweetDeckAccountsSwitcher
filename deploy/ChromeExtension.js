@@ -4,20 +4,42 @@ const spawn = require("child-process-promise").spawn;
 const fs = require("mz/fs");
 const glob = require("glob-promise");
 const JSZip = require("node-zip");
-
-const chrome = {
-    linux: "/usr/bin/google-chrome",
-    darwin: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    win32: os.homedir() + "\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe",
-};
+const regedit = require("regedit");
 
 module.exports = class ChromeExtension {
     constructor(target) {
         this.target = target || "*.{js,png,json}";
     }
 
+    findWin32Registry(key) {
+        return new Promise((resolve, rejected) => {
+            const data = new Map();
+            regedit.list([ key ])
+                   .on("data", entry => data.set(entry.key, entry.data))
+                   .on("error", e => rejected(e))
+                   .on("finish", () => resolve(data));
+        });
+    }
+
+    async getChromePath() {
+        switch (os.platform()) {
+            case "linux":
+                return "/usr/bin/google-chrome";
+
+            case "darwin":
+                return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
+            case "win32":
+                const path = "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe";
+                for (const [ key, { values } ] of await this.findWin32Registry(path)) {
+                    return values[""].value;
+                }
+        }
+    }
+
     async byCrx() {
-        if (!chrome[os.platform()]) {
+        const chrome = await this.getChromePath();
+        if (!chrome) {
             throw new Error("This operating system is not supported");
         }
 
@@ -39,7 +61,7 @@ module.exports = class ChromeExtension {
             )
         );
 
-        await spawn(chrome[os.platform()], ["--pack-extension=" + path.resolve("target")]);
+        await spawn(chrome, ["--pack-extension=" + path.resolve("target")]);
         await fs.unlink("target.pem");
         if (!await fs.exists("target.crx")) {
             throw new Error("The extension was not created.");

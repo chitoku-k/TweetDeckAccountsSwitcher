@@ -37,10 +37,20 @@ $ npm install
 
 コマンドを実行すると Chrome が自動で起動/終了してパッケージを生成し動作を確認します。
 
+#### Linux/macOS の場合
+
 ```bash
 $ export TEST_TWITTER_USERNAME='<Your TweetDeck Username>'
 $ export TEST_TWITTER_PASSWORD='<Your TweetDeck Password>'
 $ npm test
+```
+
+#### Windows の場合
+
+```dos
+> SET TEST_TWITTER_USERNAME=<Your TweetDeck Username>
+> SET TEST_TWITTER_PASSWORD=<Your TweetDeck Password>
+> npm test
 ```
 
 [travis-link]:          https://travis-ci.org/chitoku-k/TweetDeckAccountsSwitcher
