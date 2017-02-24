@@ -4,7 +4,6 @@ const spawn = require("child-process-promise").spawn;
 const fs = require("mz/fs");
 const glob = require("glob-promise");
 const JSZip = require("node-zip");
-const regedit = require("regedit");
 
 module.exports = class ChromeExtension {
     constructor(target) {
@@ -14,10 +13,10 @@ module.exports = class ChromeExtension {
     findWin32Registry(key) {
         return new Promise((resolve, rejected) => {
             const data = new Map();
-            regedit.list([ key ])
-                   .on("data", entry => data.set(entry.key, entry.data))
-                   .on("error", e => rejected(e))
-                   .on("finish", () => resolve(data));
+            require("regedit").list([ key ])
+                              .on("data", entry => data.set(entry.key, entry.data))
+                              .on("error", e => rejected(e))
+                              .on("finish", () => resolve(data));
         });
     }
 
