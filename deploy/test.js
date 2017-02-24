@@ -1,3 +1,4 @@
+const fs = require("mz/fs");
 const assert = require("assert");
 const webdriver = require("selenium-webdriver");
 const By = webdriver.By;
@@ -13,11 +14,11 @@ const WebDriver = require("./WebDriver");
 
         // Create package
         const extension = new ChromeExtension();
-        await extension.byCrx();
+        const filename = await extension.byCrx();
         console.log("Test: Package is generated.");
 
         // Initialize
-        const test = new WebDriver("./target.crx", 30000);
+        const test = new WebDriver(filename, 30000);
         await test.initialize();
 
         await test.driver.get("https://tweetdeck.twitter.com");
@@ -93,6 +94,12 @@ const WebDriver = require("./WebDriver");
 
         await test.driver.quit();
         console.log("Test: Done.");
+
+        try {
+            await fs.unlink(filename);
+        } catch (e) {
+            // No problem if fails
+        }
     } catch (e) {
         console.error("Error: " + e);
         process.exit(1);

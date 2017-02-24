@@ -11,11 +11,11 @@ module.exports = class ChromeExtension {
     }
 
     findWin32Registry(key) {
-        return new Promise((resolve, rejected) => {
+        return new Promise((resolve, reject) => {
             const data = new Map();
             require("regedit").list([ key ])
                               .on("data", entry => data.set(entry.key, entry.data))
-                              .on("error", e => rejected(e))
+                              .on("error", e => reject(e))
                               .on("finish", () => resolve(data));
         });
     }
@@ -65,6 +65,8 @@ module.exports = class ChromeExtension {
         if (!await fs.exists("target.crx")) {
             throw new Error("The extension was not created.");
         }
+
+        return await fs.realpath("target.crx");
     }
 
     async byZip(destination) {
