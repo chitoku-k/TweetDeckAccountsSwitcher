@@ -2,6 +2,7 @@ TweetDeck Accounts Switcher
 ==========================
 
 [![][travis-badge]][travis-link]
+[![][appveyor-badge]][appveyor-link]
 [![][dependencies-badge]][dependencies-link]
 
 TweetDeck のアカウント選択を複数選択ではなく切り替えになるように拡張します。  
@@ -54,6 +55,8 @@ $ npm test
 ```
 
 [travis-link]:          https://travis-ci.org/chitoku-k/TweetDeckAccountsSwitcher
-[travis-badge]:         https://img.shields.io/travis/chitoku-k/TweetDeckAccountsSwitcher.svg?style=flat-square
+[travis-badge]:         https://img.shields.io/travis/chitoku-k/TweetDeckAccountsSwitcher.svg?style=flat-square&label=mac%2Flinux
+[appveyor-link]:        https://ci.appveyor.com/project/chitoku-k/tweetdeckaccountsswitcher
+[appveyor-badge]:       https://img.shields.io/appveyor/ci/chitoku-k/TweetDeckAccountsSwitcher.svg?style=flat-square&label=windows
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/TweetDeckAccountsSwitcher
 [dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/TweetDeckAccountsSwitcher.svg?style=flat-square

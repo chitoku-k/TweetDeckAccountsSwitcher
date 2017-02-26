@@ -1,0 +1,24 @@
+version: 1.0.{build}
+skip_tags: true
+
+environment:
+  TEST_TWITTER_USERNAME:
+    secure: dI/HBFi3oFaiHEqm1mb2Sw==
+  TEST_TWITTER_PASSWORD:
+    secure: Bzu68YBGyvleQ4hMd9PFC1yhC77pBzQGB2awGbENXsrHRsziG1TyUWCOS8FsSPOG
+
+cache: node_modules
+build: off
+deploy: off
+
+install:
+  - ps: >-
+      Install-Product node 7 x64
+
+      npm install
+
+test_script:
+  - ps: >-
+      npm run lint
+
+      npm test
