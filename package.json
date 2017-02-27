@@ -5,8 +5,8 @@
   "main": "extension.js",
   "scripts": {
     "lint": "eslint **/*.js",
-    "deploy": "node --harmony-async-await ./deploy/main.js",
-    "test": "node --harmony-async-await ./deploy/test.js"
+    "deploy": "node ./deploy/main.js",
+    "test": "node ./deploy/test.js"
   },
   "repository": {
     "type": "git",
