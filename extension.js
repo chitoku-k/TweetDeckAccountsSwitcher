@@ -43,7 +43,7 @@
                     // Gets the last selected account
                     const [ current ] = selectedAccounts.filter(x => selected !== x.account);
 
-                    // Click all the selected accounts expect the last selected one
+                    // Click all the selected accounts except the last selected one
                     selector.find(".acc-selected").each((i, e) => e.dataset.id === current.account || e.click());
                 });
             });
