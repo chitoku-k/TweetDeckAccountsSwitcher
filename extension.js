@@ -11,9 +11,10 @@
                     return;
                 }
 
-                // Removes an account from the queue
-                accountKeys.shift();
-                $(this).triggerHandler("uiAccountsSelected", e, { accountKeys });
+                // Removes an account from the queue with yielding callbacks
+                setTimeout(() => {
+                    $(e.target).triggerHandler(e.type, { accountKeys: accountKeys.slice(-1) });
+                }, 0);
 
                 // Focuses on the textbox
                 $(".js-compose-text").focus();
