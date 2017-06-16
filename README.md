@@ -8,7 +8,7 @@ TweetDeck Accounts Switcher
 TweetDeck のアカウント選択を複数選択ではなく切り替えになるように拡張します。  
 新規ツイートでの選択とリツイートのダイアログでの選択の両方に対応しています。
 
-<img src="https://raw.githubusercontent.com/wiki/chitoku-k/TweetDeckAccountsSwitcher/tweetdeck_account_switcher_enabled.gif" alt="サンプル" width="262">
+<img src="https://raw.githubusercontent.com/wiki/chitoku-k/TweetDeckAccountsSwitcher/tweetdeck_account_switcher_enabled.gif" alt="サンプル" width="256">
 
 ## インストール
 

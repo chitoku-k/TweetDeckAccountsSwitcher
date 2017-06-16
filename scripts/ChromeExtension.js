@@ -73,7 +73,7 @@ module.exports = class ChromeExtension {
     async byZip(destination) {
         const zip = new JSZip();
         for (const filename of await glob(this.target)) {
-            zip.file(filename, await fs.readFile(filename));
+            zip.file(path.basename(filename), await fs.readFile(filename));
         }
 
         return fs.writeFile(destination, zip.generate({
