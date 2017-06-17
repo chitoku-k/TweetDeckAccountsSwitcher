@@ -13,7 +13,7 @@ const WebDriver = require("./WebDriver");
         }
 
         // Create package
-        const extension = new ChromeExtension();
+        const extension = new ChromeExtension("src/*");
         const filename = await extension.byCrx();
         console.log("Test: Package is generated.");
 

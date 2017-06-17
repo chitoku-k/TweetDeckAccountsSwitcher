@@ -57,7 +57,7 @@ module.exports = class ChromeExtension {
         // Copy files to the destination directory
         await glob(this.target).then(files =>
             files.map(filename =>
-                fs.createReadStream(filename).pipe(fs.createWriteStream(path.join("target", filename)))
+                fs.createReadStream(filename).pipe(fs.createWriteStream(path.join("target", path.basename(filename))))
             )
         );
 
