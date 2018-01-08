@@ -7,7 +7,7 @@ const ChromeExtension = require("./scripts/ChromeExtension");
 (async () => {
     const filename = "target.zip";
     try {
-        const extension = new ChromeExtension("src/*");
+        const extension = new ChromeExtension("src/**");
         await extension.byZip(filename);
         console.log("Deploy: Archive is created.")
 

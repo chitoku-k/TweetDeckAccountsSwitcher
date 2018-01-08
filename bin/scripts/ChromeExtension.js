@@ -56,7 +56,7 @@ module.exports = class ChromeExtension {
 
         // Copy files to the destination directory
         await Promise.all(
-            await glob(this.target).then(files =>
+            await glob(this.target, { nodir: true }).then(files =>
                 files.map(filename =>
                     fs.copyFile(
                         filename,
@@ -79,7 +79,7 @@ module.exports = class ChromeExtension {
         const zip = new JSZip();
 
         await Promise.all(
-            await glob(this.target).then(files =>
+            await glob(this.target, { nodir: true }).then(files =>
                 files.map(async filename =>
                     zip.file(
                         path.basename(filename),
