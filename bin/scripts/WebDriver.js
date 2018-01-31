@@ -6,7 +6,7 @@ module.exports = class WebDriver {
     constructor(path, timeout) {
         const options = new chrome.Options();
         options.addArguments("no-sandbox");
-        options.addExtensions(path);
+        options.addArguments("load-extension=" + path);
 
         const builder = new webdriver.Builder();
         builder.forBrowser("chrome");
@@ -14,19 +14,13 @@ module.exports = class WebDriver {
 
         this.timeout = timeout;
         this.driver = builder.build();
-        this.action = new webdriver.ActionSequence(this.driver);
     }
 
     initialize() {
-        const timeouts = this.driver.manage().timeouts();
-        return Promise.all([
-            timeouts.implicitlyWait(this.timeout),
-            timeouts.pageLoadTimeout(this.timeout),
-            timeouts.setScriptTimeout(this.timeout),
-        ]);
-    }
-
-    trigger(event, selector) {
-        return this.driver.executeScript("$('" + selector + "').trigger('" + event + "')");
+        return this.driver.manage().setTimeouts({
+            implicit: this.timeout,
+            pageLoad: this.timeout,
+            script: this.timeout,
+        });
     }
 };
