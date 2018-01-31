@@ -1,6 +1,6 @@
 {
   "name": "tweetdeck-accounts-switcher",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Forces Accounts Selector in TweetDeck to Choose One Account",
   "main": "extension.js",
   "scripts": {

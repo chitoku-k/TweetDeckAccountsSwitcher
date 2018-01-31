@@ -11,13 +11,14 @@
                     return;
                 }
 
-                // Removes an account from the queue with yielding callbacks
+                // Yield callbacks
                 setTimeout(() => {
-                    $(e.target).triggerHandler(e.type, { accountKeys: accountKeys.slice(-1) });
-                }, 0);
+                    // Removes an account from the queue
+                    $(e.currentTarget).triggerHandler(e.type, { accountKeys: accountKeys.slice(-1) });
 
-                // Focuses on the textbox
-                $(".js-compose-text").focus();
+                    // Focuses on the textbox
+                    $(".js-compose-text").focus();
+                }, 0);
             });
         }
 
