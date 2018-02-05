@@ -3,7 +3,7 @@ export default Object.assign(
     {
         applications: {
             gecko: {
-                id: "{ebdffc3c-0b3d-43ef-be94-67e51d7c1bb2}",
+                id: "{5fa30652-02b0-4739-978f-2caa4a69f60d}",
             },
         },
     }
