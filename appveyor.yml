@@ -2,7 +2,7 @@ version: 1.0.{build}
 skip_tags: true
 
 environment:
-  FIREFOX_APPLICATION_ID: {7cd0430c-a4e3-4076-9d93-96ee9185e0a5}
+  FIREFOX_APPLICATION_ID: '{7cd0430c-a4e3-4076-9d93-96ee9185e0a5}'
   TEST_TWITTER_USERNAME:
     secure: dI/HBFi3oFaiHEqm1mb2Sw==
   TEST_TWITTER_PASSWORD:
