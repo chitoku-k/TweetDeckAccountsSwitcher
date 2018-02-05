@@ -18,7 +18,5 @@ const { version, applications: { gecko: { id } } } = require("../dist/firefox/ma
         console.error("Error: cannot publish extension.");
         console.log(e);
         process.exit(1);
-    } finally {
-        await fs.unlink(filename);
     }
 })();

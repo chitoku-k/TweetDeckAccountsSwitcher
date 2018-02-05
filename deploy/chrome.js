@@ -17,7 +17,5 @@ const deploy = require("chrome-extension-deploy");
         console.error("Error: cannot publish extension.");
         console.log(e);
         process.exit(1);
-    } finally {
-        await fs.unlink(filename);
     }
 })();

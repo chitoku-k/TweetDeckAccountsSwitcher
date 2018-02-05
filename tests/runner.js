@@ -119,12 +119,6 @@ const WebDriver = require("./drivers/WebDriver");
 
         await test.driver.quit();
         console.log("Test: Done.");
-
-        try {
-            await fs.unlink(filename);
-        } catch (e) {
-            // No problem if fails
-        }
     } catch (e) {
         console.error("Error: " + e);
         process.exit(1);
