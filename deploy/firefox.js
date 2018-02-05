@@ -5,7 +5,7 @@ const { version, applications: { gecko: { id } } } = require("../dist/firefox/ma
 (async () => {
     const filename = "dist/firefox/extension.xpi";
     try {
-        const src = await fs.readFile(filename);
+        const src = fs.createReadStream(filename);
         await deploy({
             src,
             version,
