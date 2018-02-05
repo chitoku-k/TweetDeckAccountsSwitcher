@@ -16,10 +16,8 @@ build: off
 deploy: off
 
 install:
-  - ps: $firefox = 'https://download.mozilla.org/?product=firefox-devedition-stub&os=win&lang=ja'
-  - ps: Start-FileDownload $firefox -FileName 'Installer.exe'
-  - ps: .\Installer.exe | Out-Null
-  - ps: Install-Product node 9 x64
+  - ps: Import-Module .\bin\appveyor\modules.psm1
+  - ps: Invoke-AppVeyorInstall
   - cmd: npm install
 
 test_script:
