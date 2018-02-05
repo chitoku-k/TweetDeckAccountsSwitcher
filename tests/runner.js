@@ -55,26 +55,25 @@ const WebDriver = require("./drivers/WebDriver");
         const main = await test.driver.findElement(By.css(".application"));
 
         // Since the app is loaded, shorten timeout value.
-        await test.driver.manage().setTimeouts({
-            implicit: 0,
-        });
+        await test.driver.manage().setTimeouts({ implicit: 0 });
         console.log("Test: Application is loaded.");
 
         for (let i = 0; i < 5; i++) {
             console.log(`Test: New Tweet (${i + 1}/5)`);
 
             // New Tweet button
-            const button = await test.driver.findElement(By.css(".js-show-drawer.btn-compose"));
+            const button = await main.findElement(By.css(".js-show-drawer.btn-compose"));
             await button.click();
 
             // Wait until the buttons become available
-            await test.driver.wait(until.elementLocated(By.css(".js-send-button")), test.timeout);
+            await test.driver.wait(until.elementLocated(By.css(".app-content.is-open")), test.timeout);
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             for (let j = 0; j < 50; j++) {
                 const accounts = await main.findElements(By.css(".js-account-list .js-account-item"));
                 const target = accounts[Math.floor(Math.random() * accounts.length)];
                 const key = await target.getAttribute("data-account-key");
-                const item = await test.driver.findElement(By.css(`.js-account-item[data-account-key="${key}"]`));
+                const item = await main.findElement(By.css(`.js-account-item[data-account-key="${key}"]`));
                 await item.click();
 
                 const current = await main.findElements(By.css(".js-account-list .js-account-item.is-selected"));
@@ -82,12 +81,12 @@ const WebDriver = require("./drivers/WebDriver");
             }
 
             // Close Tweet drawer
-            const closer = await test.driver.findElement(By.css(".js-drawer-close"));
+            const closer = await main.findElement(By.css(".js-drawer-close"));
             await closer.click();
         }
 
         // Reopen Tweet drawer
-        const button = await test.driver.findElement(By.css(".js-show-drawer.btn-compose"));
+        const button = await main.findElement(By.css(".js-show-drawer.btn-compose"));
         await button.click();
         await test.driver.wait(until.elementLocated(By.css(".js-show-drawer.btn-compose.is-hidden")), test.timeout);
 
@@ -95,7 +94,7 @@ const WebDriver = require("./drivers/WebDriver");
             console.log(`Test: Retweet (${i + 1}/5)`);
 
             // Open Retweet modal
-            const retweet = await test.driver.findElement(By.css("a.tweet-action[rel=retweet]"));
+            const retweet = await main.findElement(By.css("a.tweet-action[rel=retweet]"));
             await retweet.click();
 
             // Wait until the dialog becomes available
@@ -105,7 +104,7 @@ const WebDriver = require("./drivers/WebDriver");
                 const accounts = await main.findElements(By.css("ul.js-account-selector a.js-account-item"));
                 const target = accounts[Math.floor(Math.random() * accounts.length)];
                 const id = await target.getAttribute("data-id");
-                const item = await test.driver.findElement(By.css(`a.js-account-item[data-id="${id}"]`));
+                const item = await main.findElement(By.css(`a.js-account-item[data-id="${id}"]`));
                 await item.click();
 
                 const current = await main.findElements(By.css("ul.js-account-selector a.is-selected"));
@@ -113,7 +112,7 @@ const WebDriver = require("./drivers/WebDriver");
             }
 
             // Close Retweet modal
-            const closer = await test.driver.findElement(By.css(".js-dismiss"));
+            const closer = await main.findElement(By.css(".js-dismiss"));
             await closer.click();
         }
 
