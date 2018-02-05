@@ -17,7 +17,7 @@ build: off
 deploy: off
 
 install:
-  - ps: Import-Module .\bin\appveyor\modules.psm1
+  - ps: Import-Module .\bin\.appveyor\modules.psm1
   - ps: Invoke-AppVeyorInstall
   - cmd: npm install
 
