@@ -31,7 +31,7 @@ const WebDriver = require("./drivers/WebDriver");
         console.log("Test: Loaded the components.");
 
         // Login button
-        const login = await test.driver.findElement(By.css("form.form-login a.btn"));
+        const login = await test.driver.findElement(By.css("form.form-login a.Button"));
         await login.click();
 
         // Login form
@@ -62,7 +62,7 @@ const WebDriver = require("./drivers/WebDriver");
             console.log(`Test: New Tweet (${i + 1}/5)`);
 
             // New Tweet button
-            const button = await main.findElement(By.css(".js-show-drawer.btn-compose"));
+            const button = await main.findElement(By.css(".js-show-drawer.Button"));
             await button.click();
 
             // Wait until the buttons become available
@@ -86,9 +86,9 @@ const WebDriver = require("./drivers/WebDriver");
         }
 
         // Reopen Tweet drawer
-        const button = await main.findElement(By.css(".js-show-drawer.btn-compose"));
+        const button = await main.findElement(By.css(".js-show-drawer.Button"));
         await button.click();
-        await test.driver.wait(until.elementLocated(By.css(".js-show-drawer.btn-compose.is-hidden")), test.timeout);
+        await test.driver.wait(until.elementLocated(By.css(".js-show-drawer.Button.is-hidden")), test.timeout);
 
         for (let i = 0; i < 5; i++) {
             console.log(`Test: Retweet (${i + 1}/5)`);
