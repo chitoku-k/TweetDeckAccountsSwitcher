@@ -12,15 +12,10 @@ TweetDeck のアカウント選択を複数選択ではなく切り替えにな�
 
 ## インストール
 
-### Chrome
+TweetDeck のアカウント選択は 2018/02/21 に Twitter のポリシーによって複数選択から切り替えに変更され、当拡張機能は役目を終えることとなりました。
+今後は Twitter の仕様変更に対応しないため、ソースコードはテストを含め正常に動作しなくなると思われます。
 
-Chrome でウェブストアを開き [CHROME に追加] をクリックします。  
-[TweetDeck Accounts Switcher - Chrome ウェブストア](https://chrome.google.com/webstore/detail/tweetdeck-accounts-switch/cjnfkpniglbbhifpkfnclpndpbhmfllh)
-
-### Firefox
-
-Firefox で AMO を開き [Firefox へ追加] をクリックします。  
-[TweetDeck Accounts Switcher – Firefox 向けアドオン](https://addons.mozilla.org/ja/firefox/addon/tweetdeck-accounts-switcher/)
+詳細は [Automation and the use of multiple accounts][twitter-blog-link] をご確認ください。
 
 ## テスト
 
@@ -70,3 +65,4 @@ $ npm test
 [appveyor-badge]:       https://img.shields.io/appveyor/ci/chitoku-k/TweetDeckAccountsSwitcher/master.svg?style=flat-square&label=windows
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/TweetDeckAccountsSwitcher
 [dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/TweetDeckAccountsSwitcher.svg?style=flat-square
+[twitter-blog-link]:    https://blog.twitter.com/developer/en_us/topics/tips/2018/automation-and-the-use-of-multiple-accounts.html
